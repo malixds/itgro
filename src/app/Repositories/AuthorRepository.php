@@ -22,9 +22,9 @@ class AuthorRepository implements IAuthorRepository
     public function get(): LengthAwarePaginator
     {
         return QueryBuilder::for(Author::class)
-            ->with('books') // Загрузка связанных книг
+            ->with('books')
             ->withCount('books') // Добавляем количество книг
-            ->orderBy( 'books_count', 'desc') // Сортируем по количеству книг (по убыванию)
+            ->orderBy('books_count', 'desc')
             ->paginate(15);
     }
 
