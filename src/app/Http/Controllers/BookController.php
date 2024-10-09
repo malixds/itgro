@@ -44,7 +44,9 @@ class BookController extends Controller
     public function bookOne(Book $book)
     {
         $book = $this->repository->findOrFail($book->id);
-        dd($book);
-        return new BookResource($book);
+        if ($book) {
+            return new BookResource($book);
+        }
+        abort(404);
     }
 }

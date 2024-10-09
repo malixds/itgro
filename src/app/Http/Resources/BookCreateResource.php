@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Author;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -16,7 +17,7 @@ class BookCreateResource extends JsonResource
     {
         return [
             "name" => $this->name,
-            "author_id" => $this->author_id,
+            "author" => $this->author,
             "annotation" => $this->annotation,
             "published_at" => $this->published_at->format('d.m.Y'),
         ];

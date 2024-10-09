@@ -14,7 +14,7 @@ class BookRepository implements IBookRepository
     public function get(): LengthAwarePaginator
     {
         return QueryBuilder::for(Book::class)
-            ->with('authors')
+            ->with('author')
             ->paginate(10);
     }
 
@@ -30,6 +30,6 @@ class BookRepository implements IBookRepository
     }
     public function findOrFail(int $id): ?Book
     {
-        return Book::query()->where('id', $id)->with('authors')->first();
+        return Book::query()->where('id', $id)->with('author')->first();
     }
 }

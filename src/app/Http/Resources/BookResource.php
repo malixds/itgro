@@ -17,7 +17,7 @@ class BookResource extends JsonResource
     {
         return [
             "name" => $this->name,
-            "author" => Author::find($this->author_id),
+            "author" => $this->author,
             "annotation" => $this->annotation,
             "published_at" => $this->published_at,
         ];

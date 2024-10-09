@@ -11,7 +11,7 @@ class Book extends Model
     use HasFactory;
     protected $guarded = false;
 
-    public function authors(): BelongsTo
+    public function author(): BelongsTo
     {
         return $this->belongsTo(Author::class);
     }

@@ -22,7 +22,6 @@ class AuthorController extends Controller
     public function authorOne(Author $author)
     {
         $author = $this->repository->findOrFail($author->id);
-        dd($author);
         return new AuthorResource($author);
     }
     public function authorCreate(CreateAuthorRequest $request)
