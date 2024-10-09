@@ -9,19 +9,16 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-
     public function up(): void
     {
-        Schema::create('books', function (Blueprint $table) {
+        Schema::create('chapters', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('author_id')
-                ->references('id')
-                ->on('authors')
-                ->onDelete('cascade');
             $table->string('name');
-            $table->text('annotation')->nullable();
-            $table->unsignedInteger('total_characters')->default(0);
-            $table->date('published_at');
+            $table->text('content');
+            $table->foreignId('book_id')
+                ->references('id')
+                ->on('books')
+                ->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -31,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('books');
+        Schema::dropIfExists('chapters');
     }
 };
