@@ -19,5 +19,8 @@ class DatabaseSeeder extends Seeder
             'name' => 'Test User',
             'email' => 'test@example.com',
         ]);
+        (new AuthorSeeder())->run();
+        (new BookSeeder())->run();
+        (new ChapterSeeder())->run();
     }
 }
