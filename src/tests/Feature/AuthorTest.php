@@ -45,13 +45,13 @@ class AuthorTest extends TestCase
         $author = Author::factory()->create([
             'name' => 'Maxim',
             'information' => 'Some information about John.',
-            'birthday' => '1980-01-01',
+            'birthday' => '01-01-2003',
         ]);
 
         $response = $this->putJson(route('author.update', ["author" => $author]), [
             'name' => 'Maxim',
             'information' => 'Updated information.',
-            'birthday' => '1985-01-01',
+            'birthday' => '02-02-2004',
         ]);
 
         $response->assertStatus(200);

@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\PublicationDateAfterAuthorBirthday;
 use Illuminate\Foundation\Http\FormRequest;
 
 class EditBookRequest extends FormRequest
@@ -11,7 +12,7 @@ class EditBookRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -25,7 +26,11 @@ class EditBookRequest extends FormRequest
             "name" => "required|min:2|max:100",
             "author_id" => "required",
             "annotation" => "nullable|max:1000",
-            "published_at" => "required",
+            "published_at" => [
+                "required",
+                "date_format:d-m-Y",
+                new PublicationDateAfterAuthorBirthday($this->author_id),
+            ],
         ];
     }
 }

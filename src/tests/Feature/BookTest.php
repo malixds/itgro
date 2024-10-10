@@ -33,6 +33,33 @@ class BookTest extends TestCase
         ]);
     }
 
+    public function testUpdateBook()
+    {
+        $author = Author::factory()->create([
+            'name' => 'Maxim',
+            'information' => 'Some information about Maxim',
+            'birthday' => '01-01-2003',
+        ]);
+        $book = Book::factory()->create([
+            'name' => 'Nice book',
+            'author_id' => $author->id,
+            'annotation' => 'Some information about this book',
+            'published_at' => '01-01-2010',
+        ]);
+
+        $response = $this->putJson(route('book.update', ["book" => $book]), [
+            'name' => 'NIce book Maxim',
+            'author_id' => $author->id,
+            'annotation' => 'Updated information.',
+            'published_at' => '03-02-2011',
+        ]);
+
+        $response->assertStatus(200);
+        $this->assertDatabaseHas('books', [
+            'name' => 'NIce book Maxim',
+        ]);
+    }
+
     /** @test */
 //    public function checkValidateRequiredFieldOfBookCreating()
 //    {

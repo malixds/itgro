@@ -14,7 +14,7 @@ Route::post('/author/create', [AuthorController::class, 'authorCreate'])->name('
 Route::put('/author/update/{author}', [AuthorController::class, 'authorUpdate'])->name('author.update');
 
 Route::post('/book/create', [BookController::class, 'bookCreate'])->name('book.create');
-Route::put('/book/update', [BookController::class, 'bookUpdate'])->name('book.update');
+Route::put('/book/update/{book}', [BookController::class, 'bookUpdate'])->name('book.update');
 Route::get('/books', [BookController::class, 'booksAll'])->name('book.all');
 Route::get('/book/{book}', [BookController::class, 'bookOne'])->name('book');
 
