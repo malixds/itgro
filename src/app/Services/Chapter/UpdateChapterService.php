@@ -20,7 +20,7 @@ class UpdateChapterService
             $chapter->book->total_characters += $diff;
             $chapter->book->save();
         });
-        return $chapter;
+        return $this->repository->find($chapter->id);
     }
 
 }

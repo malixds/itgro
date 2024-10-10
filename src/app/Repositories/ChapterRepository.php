@@ -16,4 +16,9 @@ class ChapterRepository implements IChapterRepository
     {
         return Chapter::query()->find($id)->update($data);
     }
+
+    public function find(int $id): ?Chapter
+    {
+        return Chapter::query()->where('id', $id)->with('book')->first();
+    }
 }

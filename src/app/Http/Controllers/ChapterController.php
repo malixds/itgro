@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateChapterRequest;
 use App\Http\Requests\UpdateChapterRequest;
 use App\Http\Resources\CreateChapterResource;
+use App\Http\Resources\UpdateChapterResource;
 use App\Interfaces\IChapterRepository;
 use App\Models\Chapter;
 use App\Services\Chapter\CreateChapterService;
@@ -14,9 +15,6 @@ use Illuminate\Support\Facades\DB;
 
 class ChapterController extends Controller
 {
-    public function __construct(private IChapterRepository $repository)
-    {
-    }
     public function chapterCreate(CreateChapterRequest $request, CreateChapterService $service): CreateChapterResource
     {
         return new CreateChapterResource($service->run(null, $request->validated()));
@@ -24,7 +22,6 @@ class ChapterController extends Controller
 
     public function chapterUpdate(UpdateChapterRequest $request, Chapter $chapter, UpdateChapterService $service)
     {
-        $chapter = $service->run($request->validated(), $chapter);
-        dd($chapter);
+        return new UpdateChapterResource($service->run($request->validated(), $chapter));
     }
 }
