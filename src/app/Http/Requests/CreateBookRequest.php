@@ -24,8 +24,8 @@ class CreateBookRequest extends FormRequest
     {
         return [
             "name" => "required|min:2|max:100",
-            "author_id" => "required",
-            "annotation" => "nullable|max:1000",
+            "author_id" => "required|integer|exists:authors,id",
+            "annotation" => "max:1000",
             "published_at" => [
                 "required",
                 "date_format:d-m-Y",

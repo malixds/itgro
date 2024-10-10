@@ -22,9 +22,9 @@ class EditAuthorRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "name" => "required|string|min:2|max:40",
-            "information" => "nullable|max:1000",
-            "birthday" => "nullable"
+            "name" => "string|min:2|max:40",
+            "information" => "max:1000",
+            "birthday" => "date_format:d-m-Y",
         ];
     }
 

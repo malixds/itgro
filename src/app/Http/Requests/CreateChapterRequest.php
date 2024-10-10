@@ -22,9 +22,9 @@ class CreateChapterRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "book_id" => "required",
+            "book_id" => "required|exists:books,id",
             "name" => "required|max:60",
-            "content" => "required",
+            "content" => "required|max:300",
         ];
     }
 }

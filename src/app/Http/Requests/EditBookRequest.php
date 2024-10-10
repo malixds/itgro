@@ -23,11 +23,10 @@ class EditBookRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "name" => "required|min:2|max:100",
-            "author_id" => "required",
-            "annotation" => "nullable|max:1000",
+            "name" => "min:2|max:100",
+            "author_id" => "integer|exists:authors,id",
+            "annotation" => "max:1000",
             "published_at" => [
-                "required",
                 "date_format:d-m-Y",
                 new PublicationDateAfterAuthorBirthday($this->author_id),
             ],
