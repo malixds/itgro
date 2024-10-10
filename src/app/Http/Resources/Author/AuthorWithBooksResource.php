@@ -20,7 +20,7 @@ class AuthorWithBooksResource extends JsonResource
             "information" => $this->information,
             "books_count" => $this->books_count,
             "books" => $this->books,
-            "created_at" => $this->created_at->isoFormat('D MMMM YYYY')
+            "birthday" => $this->birthday,
         ];
     }
 }

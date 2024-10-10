@@ -37,8 +37,11 @@ class CreateBookRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'title.required' => 'A title is required',
-            'body.required' => 'A message is required',
+            'name.required' => 'Название - обязательное значения',
+            'name.min' => 'Минимальная величина имени - 2',
+            'name.max' => 'Максимальная величина имени - 2',
+            'annotation.max' => "Максимальная величина аннотации - 1000 символов",
+            'published_at.date_format:d-m-Y' => "Формат даты dd-mm-yyyy",
         ];
     }
 }

@@ -3,7 +3,6 @@ version: '3'
 networks:
   laravel:
 
-
 services:
   app:
     build:
@@ -18,26 +17,7 @@ services:
       - ./src:/var/www/html:delegated
     depends_on:
       - php
-      - redis
-      - mysql
       - postgres
-      - mailhog
-    networks:
-      - laravel
-
-  mysql:
-    image: mariadb:10.6
-    restart: unless-stopped
-    tty: true
-    ports:
-      - "3306:3306"
-    environment:
-      MYSQL_DATABASE: homestead
-      MYSQL_USER: homestead
-      MYSQL_PASSWORD: secret
-      MYSQL_ROOT_PASSWORD: secret
-      SERVICE_TAGS: dev
-      SERVICE_NAME: mysql
     networks:
       - laravel
 
@@ -46,8 +26,8 @@ services:
     image: postgres
     environment:
       POSTGRES_DATABASE: test
-      POSTGRES_USER: ${POSTGRES_USER:-test}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-test}
+      POSTGRES_USER: test
+      POSTGRES_PASSWORD: test
       PGDATA: /data/postgres
     volumes:
       - postgres:/data/postgres
@@ -68,14 +48,6 @@ services:
       - "9000:9000"
     volumes:
       - ./src:/var/www/html:delegated
-    networks:
-      - laravel
-
-  redis:
-    image: redis:alpine
-    restart: unless-stopped
-    ports:
-      - "6379:6379"
     networks:
       - laravel
 
@@ -117,17 +89,8 @@ services:
     volumes:
       - ./src:/var/www/html:delegated
     depends_on:
-      - mysql
       - postgres
     entrypoint: [ 'php', '/var/www/html/artisan' ]
-    networks:
-      - laravel
-
-  mailhog:
-    image: mailhog/mailhog:latest
-    ports:
-      - "1025:1025"
-      - "8025:8025"
     networks:
       - laravel
 

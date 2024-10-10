@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\PublicationDateAfterAuthorBirthday;
 use Illuminate\Foundation\Http\FormRequest;
 
 class CreateAuthorRequest extends FormRequest
@@ -24,7 +25,9 @@ class CreateAuthorRequest extends FormRequest
         return [
             "name" => "required|string|min:2|max:40",
             "information" => "nullable|max:1000",
-            "birthday" => "nullable"
+            "birthday" => [
+                "date_format:d-m-Y",
+            ],
         ];
     }
 }

@@ -18,7 +18,7 @@ class AuthorTest extends TestCase
         $response = $this->postJson(route('author.create'), [
             'name' => 'John Doe',
             'information' => 'Some information about John.',
-            'birthday' => '1980-01-01',
+            'birthday' => '01-01-2000',
         ]);
 
         $response->assertStatus(201);
