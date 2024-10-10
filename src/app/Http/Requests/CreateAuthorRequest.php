@@ -25,9 +25,7 @@ class CreateAuthorRequest extends FormRequest
         return [
             "name" => "required|string|min:2|max:40",
             "information" => "nullable|max:1000",
-            "birthday" => [
-                "date_format:d-m-Y",
-            ],
+            "birthday" => "date_format:d-m-Y",
         ];
     }
 }

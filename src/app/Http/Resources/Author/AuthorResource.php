@@ -19,7 +19,7 @@ class AuthorResource extends JsonResource
             "name" => $this->name,
             "information" => $this->information,
             "books_count" => $this->books_count,
-            "created_at" => $this->created_at->isoFormat('D MMMM YYYY')
+            "birthday" => $this->birthday,
         ];
     }
 }

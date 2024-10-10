@@ -20,14 +20,20 @@ class BookRepository implements IBookRepository
 
     public function create(array $data): ?Book
     {
-        $data['published_at'] = Carbon::createFromFormat('d-m-Y', $data['published_at']);
+        if ($data['published_at']) {
+            $data['published_at'] = Carbon::createFromFormat('d-m-Y', $data['published_at']);
+        }
         return Book::query()->create($data);
     }
 
     public function update(array $data, int $id): int
     {
+        if ($data['published_at']) {
+            $data['published_at'] = Carbon::createFromFormat('d-m-Y', $data['published_at']);
+        }
         return Book::query()->where('id', $id)->update($data);
     }
+
     public function findOrFail(int $id): ?Book
     {
         return Book::query()->where('id', $id)->with('author')->first();

@@ -6,6 +6,7 @@ use App\Http\Requests\CreateBookRequest;
 use App\Http\Requests\EditBookRequest;
 use App\Http\Resources\Book\BookCreateResource;
 use App\Http\Resources\Book\BookFullResource;
+use App\Http\Resources\Book\BookFullResourceCollection;
 use App\Http\Resources\Book\BookResource;
 use App\Http\Resources\Book\BookResourceCollection;
 use App\Interfaces\IBookRepository;
@@ -34,10 +35,10 @@ class BookController extends Controller
         }
         return response()->json(['message' => 'Error'], 400);
     }
-    public function booksAll(): BookResourceCollection
+    public function booksAll(): BookFullResourceCollection
     {
         $books = $this->repository->get();
-        return new BookResourceCollection(new BookFullResource($books));
+        return new BookFullResourceCollection(new BookFullResource($books));
     }
 
     public function bookOne(Book $book)

@@ -19,7 +19,7 @@ class BookWithAuthorResource extends JsonResource
             "total_characters" => $this->total_characters,
             "author" => $this->author,
             "annotation" => $this->annotation,
-            "published_at" => $this->published_at,
+            "published_at" => $this->published_at->format('d.m.Y'),
         ];
     }
 }

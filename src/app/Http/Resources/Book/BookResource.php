@@ -19,7 +19,7 @@ class BookResource extends JsonResource
             "author_id" => $this->author->id,
             "total_characters" => $this->total_characters,
             "annotation" => $this->annotation,
-            "published_at" => $this->published_at,
+            "published_at" => $this->published_at->format('d.m.Y'),
         ];
     }
 }
