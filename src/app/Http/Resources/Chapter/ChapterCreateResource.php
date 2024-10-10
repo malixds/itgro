@@ -5,7 +5,7 @@ namespace App\Http\Resources\Chapter;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class CreateChapterResource extends JsonResource
+class ChapterCreateResource extends JsonResource
 {
     /**
      * Transform the resource into an array.

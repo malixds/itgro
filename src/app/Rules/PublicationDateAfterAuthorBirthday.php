@@ -21,7 +21,6 @@ class PublicationDateAfterAuthorBirthday implements Rule
         if (!$author) {
             return false; // Если автор не найден, валидация не проходит
         }
-
         try {
             $publicationDate = Carbon::createFromFormat('d-m-Y', $value);
             $birthday = Carbon::createFromFormat('Y-m-d', $author->birthday);
