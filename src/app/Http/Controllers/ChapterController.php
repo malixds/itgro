@@ -4,14 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateChapterRequest;
 use App\Http\Requests\UpdateChapterRequest;
-use App\Http\Resources\CreateChapterResource;
-use App\Http\Resources\UpdateChapterResource;
-use App\Interfaces\IChapterRepository;
+use App\Http\Resources\Chapter\CreateChapterResource;
+use App\Http\Resources\Chapter\UpdateChapterResource;
 use App\Models\Chapter;
 use App\Services\Chapter\CreateChapterService;
 use App\Services\Chapter\UpdateChapterService;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class ChapterController extends Controller
 {

@@ -2,23 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CreateAuthorRequest;
 use App\Http\Requests\CreateBookRequest;
-use App\Http\Requests\EditAuthorRequest;
 use App\Http\Requests\EditBookRequest;
-use App\Http\Resources\AuthorResource;
-use App\Http\Resources\AuthorResourceCollection;
-use App\Http\Resources\BookCreateResource;
-use App\Http\Resources\BookResource;
-use App\Http\Resources\BookResourceCollection;
+use App\Http\Resources\Book\BookCreateResource;
+use App\Http\Resources\Book\BookFullResource;
+use App\Http\Resources\Book\BookResource;
+use App\Http\Resources\Book\BookResourceCollection;
 use App\Interfaces\IBookRepository;
-use App\Models\Author;
 use App\Models\Book;
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Http\Request;
 
 class BookController extends Controller
 {
+
+    //  BookFullResource - с автором и главами
+    //  BookWithAuthorResource - с автором
+    //  BookWithChaptersResource - c главами
+    //  BookResource - только информация о книге
 
     public function __construct(private IBookRepository $repository)
     {
@@ -38,14 +37,14 @@ class BookController extends Controller
     public function booksAll(): BookResourceCollection
     {
         $books = $this->repository->get();
-        return new BookResourceCollection(new BookResource($books));
+        return new BookResourceCollection(new BookFullResource($books));
     }
 
     public function bookOne(Book $book)
     {
         $book = $this->repository->findOrFail($book->id);
         if ($book) {
-            return new BookResource($book);
+            return new BookFullResource($book);
         }
         abort(404);
     }

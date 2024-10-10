@@ -32,4 +32,9 @@ class AuthorRepository implements IAuthorRepository
     {
         return Author::query()->where('id', $id)->with('books')->first();
     }
+
+    public function find(int $id): ?Author
+    {
+        return Author::query()->find($id);
+    }
 }

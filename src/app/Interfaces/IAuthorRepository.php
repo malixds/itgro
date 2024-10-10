@@ -10,4 +10,5 @@ interface IAuthorRepository
     public function update(array $data, int $id): int;
     public function get();
     public function findOrFail(int $id): ?Author;
+    public function find(int $id): ?Author;
 }

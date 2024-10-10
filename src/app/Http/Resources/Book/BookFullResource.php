@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Http\Resources;
+namespace App\Http\Resources\Book;
 
-use App\Models\Author;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class BookCreateResource extends JsonResource
+class BookFullResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -17,9 +16,11 @@ class BookCreateResource extends JsonResource
     {
         return [
             "name" => $this->name,
+            "total_characters" => $this->total_characters,
             "author" => $this->author,
+            "chapters" => $this->chapters,
             "annotation" => $this->annotation,
-            "published_at" => $this->published_at->format('d.m.Y'),
+            "published_at" => $this->published_at,
         ];
     }
 }

@@ -2,14 +2,14 @@
 
 namespace Tests\Feature;
 
-use App\Interfaces\IAuthorRepository;
 use App\Models\Author;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class AuthorTest extends TestCase
 {
+
+    use RefreshDatabase;
     /**
      * A basic feature test example.
      */

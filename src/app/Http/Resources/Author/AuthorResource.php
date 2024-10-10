@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Resources;
+namespace App\Http\Resources\Author;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class CreateChapterResource extends JsonResource
+class AuthorResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,9 +16,10 @@ class CreateChapterResource extends JsonResource
     {
         return [
             "id" => $this->id,
-            "book" => $this->book,
             "name" => $this->name,
-            "content" => $this->content,
+            "information" => $this->information,
+            "books_count" => $this->books_count,
+            "created_at" => $this->created_at->isoFormat('D MMMM YYYY')
         ];
     }
 }

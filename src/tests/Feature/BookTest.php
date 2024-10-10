@@ -2,12 +2,10 @@
 
 namespace Tests\Feature;
 
-use App\Interfaces\IAuthorRepository;
-use App\Interfaces\IBookRepository;
 use App\Models\Author;
 use App\Models\Book;
+use App\Models\Chapter;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class BookTest extends TestCase
@@ -15,6 +13,7 @@ class BookTest extends TestCase
     /**
      * A basic feature test example.
      */
+    use RefreshDatabase;
 
     public function testCreateBook()
     {
@@ -99,5 +98,38 @@ class BookTest extends TestCase
 
         $response->assertStatus(422);
         $response->assertJsonValidationErrors(['published_at']);
+    }
+
+    public function testGetBookWithChapters()
+    {
+        $author = Author::factory()->create();
+        $book = Book::factory()->create(['author_id' => $author->id]);
+        Chapter::factory()->count(2)->create(['book_id' => $book->id]);
+        $response = $this->getJson(route('book', ['book' => $book]));
+        $response->assertStatus(200);
+        $response->assertJsonStructure([
+            'data' => [
+                'name',
+                'total_characters',
+                'chapters' => [],
+            ],
+        ]);
+    }
+
+    public function testGetBookFull()
+    {
+        $author = Author::factory()->create();
+        $book = Book::factory()->create(['author_id' => $author->id]);
+        Chapter::factory()->count(2)->create(['book_id' => $book->id]);
+        $response = $this->getJson(route('book', ['book' => $book]));
+        $response->assertStatus(200);
+        $response->assertJsonStructure([
+            'data' => [
+                'name',
+                'total_characters',
+                'author' => [],
+                'chapters' => [],
+            ],
+        ]);
     }
 }
