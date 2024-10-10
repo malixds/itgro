@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('chapters', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->text('content');
             $table->foreignId('book_id')
                 ->references('id')
                 ->on('books')
                 ->onDelete('cascade');
+            $table->string('name');
+            $table->text('content');
             $table->timestamps();
         });
     }

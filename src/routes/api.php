@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\ChapterController;
 use App\Models\Author;
 use App\Models\Book;
 use Illuminate\Support\Facades\Route;
@@ -17,4 +18,7 @@ Route::put('/book/update', [BookController::class, 'bookUpdate'])->name('book.up
 Route::get('/books', [BookController::class, 'booksAll'])->name('book.all');
 Route::get('/book/{book}', [BookController::class, 'bookOne'])->name('book');
 
+
+Route::post('/chapter/create', [ChapterController::class, 'chapterCreate'])->name('chapter.create');
+Route::put('/chapter/update/{chapter}', [ChapterController::class, 'chapterUpdate'])->name('chapter.update');
 

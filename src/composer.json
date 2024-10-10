@@ -12,7 +12,8 @@
         "spatie/laravel-json-api-paginate": "^1.15",
         "spatie/laravel-paginateroute": "^2.7",
         "spatie/laravel-permission": "^6.9",
-        "spatie/laravel-query-builder": "^6.2"
+        "spatie/laravel-query-builder": "^6.2",
+        "ext-iconv": "*"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",

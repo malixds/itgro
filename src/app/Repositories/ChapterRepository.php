@@ -11,4 +11,9 @@ class ChapterRepository implements IChapterRepository
     {
         return Chapter::query()->create($data);
     }
+
+    public function update(array $data, int $id): int
+    {
+        return Chapter::query()->find($id)->update($data);
+    }
 }
