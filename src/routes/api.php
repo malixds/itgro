@@ -3,8 +3,6 @@
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\ChapterController;
-use App\Models\Author;
-use App\Models\Book;
 use Illuminate\Support\Facades\Route;
 
 

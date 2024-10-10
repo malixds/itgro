@@ -3,6 +3,7 @@
 namespace App\Services\Chapter;
 
 use App\Interfaces\IChapterRepository;
+use App\Models\Chapter;
 use Illuminate\Support\Facades\DB;
 
 class CreateChapterService
@@ -10,7 +11,7 @@ class CreateChapterService
     public function __construct(private IChapterRepository $repository)
     {
     }
-    public function run($chapter, array $data)
+    public function run($chapter, array $data): Chapter
     {
         DB::transaction(function() use ($data, &$chapter) {
             $chapter = $this->repository->create($data);

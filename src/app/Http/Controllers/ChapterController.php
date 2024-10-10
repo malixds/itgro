@@ -17,7 +17,7 @@ class ChapterController extends Controller
         return new ChapterCreateResource($service->run(null, $request->validated()));
     }
 
-    public function chapterUpdate(UpdateChapterRequest $request, Chapter $chapter, UpdateChapterService $service)
+    public function chapterUpdate(UpdateChapterRequest $request, Chapter $chapter, UpdateChapterService $service): ChapterUpdateResource
     {
         return new ChapterUpdateResource($service->run($request->validated(), $chapter));
     }

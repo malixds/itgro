@@ -11,6 +11,7 @@ use App\Http\Resources\Book\BookResource;
 use App\Http\Resources\Book\BookResourceCollection;
 use App\Interfaces\IBookRepository;
 use App\Models\Book;
+use Illuminate\Http\JsonResponse;
 
 class BookController extends Controller
 {
@@ -23,17 +24,20 @@ class BookController extends Controller
     public function __construct(private IBookRepository $repository)
     {
     }
-    public function bookCreate(CreateBookRequest $request)
+    public function bookCreate(CreateBookRequest $request): JsonResponse|BookCreateResource
     {
         $book = $this->repository->create($request->validated());
-        return new BookCreateResource($book);
+        if ($book) {
+            return new BookCreateResource($book);
+        }
+        return response()->json(['message' => 'Ошибка создания книги'], 400);
     }
-    public function bookUpdate(EditBookRequest $request, Book $book)
+    public function bookUpdate(EditBookRequest $request, Book $book): JsonResponse
     {
         if ($this->repository->update($request->validated(), $book->id)) {
-            return response()->json(["Book updated", 'book' => $book->fresh()]);
+            return response()->json(["Книга обновлена", 'book' => $book->fresh()]);
         }
-        return response()->json(['message' => 'Error'], 400);
+        return response()->json(['message' => 'Ошибка при обновлении пользователя'], 400);
     }
     public function booksAll(): BookFullResourceCollection
     {
@@ -41,12 +45,12 @@ class BookController extends Controller
         return new BookFullResourceCollection(new BookFullResource($books));
     }
 
-    public function bookOne(Book $book)
+    public function bookOne(Book $book): BookFullResource|JsonResponse
     {
         $book = $this->repository->findOrFail($book->id);
         if ($book) {
             return new BookFullResource($book);
         }
-        abort(404);
+        return response()->json(['message' => 'Книга не найдена'], 404);
     }
 }

@@ -20,12 +20,4 @@ class Book extends Model
     {
         return $this->hasMany(Chapter::class);
     }
-
-//    public function updateCharacterCount()
-//    {
-//        $this->total_characters = $this->chapters->sum(function ($chapter) {
-//            return strlen($chapter->content);
-//        });
-//        $this->save();
-//    }
 }

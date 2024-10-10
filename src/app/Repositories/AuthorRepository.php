@@ -10,19 +10,22 @@ use Spatie\QueryBuilder\QueryBuilder;
 
 class AuthorRepository implements IAuthorRepository
 {
-    public function create(array $data): ?Author
+    private function convertToValidFormat(array $data)
     {
         if ($data['birthday']) {
             $data['birthday'] = Carbon::createFromFormat('d-m-Y', $data['birthday']);
         }
+        return $data;
+    }
+    public function create(array $data): ?Author
+    {
+        $data = $this->convertToValidFormat($data);
         return Author::query()->create($data);
     }
 
     public function update(array $data, int $id): int
     {
-        if ($data['birthday']) {
-            $data['birthday'] = Carbon::createFromFormat('d-m-Y', $data['birthday']);
-        }
+        $data = $this->convertToValidFormat($data);
         return Author::query()->where('id', $id)->update($data);
     }
 

@@ -12,7 +12,7 @@ class UpdateChapterService
     {
     }
 
-    public function run(array $data, Chapter $chapter)
+    public function run(array $data, Chapter $chapter): ?Chapter
     {
         $diff =  iconv_strlen($data["content"]) - iconv_strlen($chapter->content);
         DB::transaction(function() use ($data, &$chapter, $diff) {

@@ -11,6 +11,14 @@ use Spatie\QueryBuilder\QueryBuilder;
 
 class BookRepository implements IBookRepository
 {
+    private function convertToValidFormat(array $data)
+    {
+        if ($data['published_at']) {
+            $data['published_at'] = Carbon::createFromFormat('d-m-Y', $data['published_at']);
+        }
+        return $data;
+    }
+
     public function get(): LengthAwarePaginator
     {
         return QueryBuilder::for(Book::class)
@@ -20,17 +28,13 @@ class BookRepository implements IBookRepository
 
     public function create(array $data): ?Book
     {
-        if ($data['published_at']) {
-            $data['published_at'] = Carbon::createFromFormat('d-m-Y', $data['published_at']);
-        }
+        $data = $this->convertToValidFormat($data);
         return Book::query()->create($data);
     }
 
     public function update(array $data, int $id): int
     {
-        if ($data['published_at']) {
-            $data['published_at'] = Carbon::createFromFormat('d-m-Y', $data['published_at']);
-        }
+        $data = $this->convertToValidFormat($data);
         return Book::query()->where('id', $id)->update($data);
     }
 
