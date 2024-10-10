@@ -112,7 +112,7 @@
 
 #### 6. Обновление информации о книге
 
-- **Маршрут**: `PUT /book/update`
+- **Маршрут**: `PUT /book/update/{book}`
 - **Контроллер**: `BookController::bookUpdate`
 - **Описание**: Обновление информации о книге. Необходимые поля для
   обновления: `id`, `author_id`, `name`, `annotation`, `published_at`.
