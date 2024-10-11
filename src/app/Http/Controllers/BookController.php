@@ -37,7 +37,7 @@ class BookController extends Controller
         if ($this->repository->update($request->validated(), $book->id)) {
             return response()->json(["Книга обновлена", 'book' => $book->fresh()]);
         }
-        return response()->json(['message' => 'Ошибка при обновлении пользователя'], 400);
+        return response()->json(['message' => 'Ошибка при обновлении книги'], 400);
     }
     public function booksAll(): BookFullResourceCollection
     {
